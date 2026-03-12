@@ -5,7 +5,6 @@ To Implement RSA Encryption Algorithm in Cryptography
 
 ## Algorithm:
 
-
 Step 1: Design of RSA Algorithm  
 The RSA algorithm is based on the mathematical difficulty of factoring the product of two large prime numbers. It involves generating a public and private key pair, where the public key is used for encryption, and the private key is used for decryption.
 
@@ -37,11 +36,56 @@ The security of RSA relies on the difficulty of factoring large numbers; thus, c
 
 ## Program:
 
+```
+Developed By: Naveenkumar M
+Reg.No: 212224230182
 
+#include <stdio.h>
+
+int gcd(int a,int b){
+    while(b!=0){ a=a%b; int t=a; a=b; b=t; }
+    return a;
+}
+
+int main(){
+    int p,q,n,phi,e=2,d=1,msg,enc,dec,i;
+    char name[50];
+    printf("Enter your name: ");
+    scanf(" %[^\n]",name);
+
+    printf("Enter prime p: ");
+    scanf("%d",&p);
+    printf("Enter prime q: ");
+    scanf("%d",&q);
+
+    n=p*q;
+    phi=(p-1)*(q-1);
+
+    while(gcd(e,phi)!=1) e++;
+
+    for(i=1;i<phi;i++)
+        if((e*i)%phi==1){ d=i; break; }
+
+    printf("Public key: (%d,%d)\n",n,e);
+    printf("Private key: (%d,%d)\n",n,d);
+
+    printf("Enter message: ");
+    scanf("%d",&msg);
+
+    enc=1; for(i=0;i<e;i++) enc=(enc*msg)%n;
+    dec=1; for(i=0;i<d;i++) dec=(dec*enc)%n;
+
+    printf("Encrypted: %d\n",enc);
+    printf("Decrypted: %d\n",dec);
+
+    return 0;
+}
+```
 
 
 ## Output:
 
+<img width="1481" height="844" alt="image" src="https://github.com/user-attachments/assets/d158cede-d6ef-4585-8740-c7c0ee17ebf9" />
 
 
 ## Result:
